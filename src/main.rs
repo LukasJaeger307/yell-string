@@ -67,26 +67,25 @@ fn process_alphabetic_char(alphabetic_char : &char, uppercase : &bool) -> char {
         if to_uppercase.len() == 1 {
             match to_uppercase.next() {
                 Some(uppercase_char) => uppercase_char,
-                None => alphabetic_char.clone(),
+                None => *alphabetic_char,
             }
         } else {
-            alphabetic_char.clone()
-        }
+            *alphabetic_char      
+	}
     } else {
         let mut to_lowercase : ToLowercase = alphabetic_char.to_lowercase();
         if to_lowercase.len() == 1 {
             match to_lowercase.next() {
                 Some(lowercase_char) => lowercase_char,
-                None => alphabetic_char.clone(),
+                None => *alphabetic_char,
             }
         } else {
-            alphabetic_char.clone()
+            *alphabetic_char
         }
     }
-
 }
 
-fn yellify_string(to_yellify : &String) -> String {
+fn yellify_string(to_yellify : &str) -> String {
     let mut yellified : String = String::new();
     let mut uppercase : bool = true;
     for letter in to_yellify.chars() {
@@ -109,7 +108,7 @@ fn main() {
         if skip_this_string {
             skip_this_string = false;
         } else {
-            let yellified_string : String = yellify_string(&arg);
+            let yellified_string : String = yellify_string(arg);
             println!("{}", yellified_string);
         }
     }
